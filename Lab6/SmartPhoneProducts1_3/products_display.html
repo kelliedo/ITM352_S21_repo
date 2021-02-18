@@ -6,21 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="products-style.css">
     <script>
-        const store_name = "Kellie Do";
-        var hits = 10;
-        spins = 100;
+        var store_name = "Kellie Do";
+        var first_name = "Kellie";
+        var last_name = "Do";
+        var year = new Date();
+        var date = today.getFullYear();
+        var time = today.getHours() + ":" + today.getMinutes();
     </script>
     <title>Smartphone Products</title>
 </head>
 
 <body>
     <header>
-        <h1 id='xxx'>
-            <script>document.write(store_name);</script>'s Used Smart Phone Store
+        <center>
+            <span style="font-size: 600%;">
+            <script>
+                
+                    document.write("<b>" + first_name + "</b><i>" + last_name + "</i>'s");
+                
+            </script>
+            </span>
+        <h1>   
+            Used Smart Phone Store
         </h1>
+        </center>
         <p style="text-align: center; font-weight: bold;">
             Hits:<span id="hits_span">0</span>
             Spins:<span id="spins_span">0</span>
+            Hit/Spin:<span id="hit_spin_span">0</span>
         </p>
     </header>
     <div>
@@ -31,13 +44,13 @@
             " style="direction: rtl;">
             </div>
 
-            <section class="item" onmouseover="
-            hits_span.innerHTML = hits;
-            spins_span.innerHTML = spins; 
+            <section class="item" 
+            onmouseover="
+            spins_span.innerHTML = ++spins; 
             this.className= 'item rotate';
+            hit_spin_span.innerHTML = number.toFixed(hits_span.innerHTML/spins_span.innerHTML);
             " onclick="
-            hits_span.innerHTML = hits;
-            spins_span.innerHTML = spins; 
+            hits_span.innerHTML = hits_span.innerHTML/spins_span.innerHTML;
             this.className='item';
             ">
                 <h2>HTC</h2>
@@ -99,7 +112,16 @@
         </main>
     </div>
     <footer>
-        <h1>Your One Stop Phone Shop</h1>
+        <script>
+        document.write(`
+        <table border="1" style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tr><th colspan="2"><h1>Your One Stop For Used Phones - ${first_name[0] + '.' + last_name[0] + '.'}'s</h1></th></tr>
+            <tr><td>1.</td><td><br />Copyright @ ${first_name + " " + last_name}</td></tr>
+            <tr><td>2.</td><td>${year}</td></tr>
+            <tr><td>3.</td><td>${time}</td></tr>
+        </table>
+        `);
+    </script>
     </footer>
 
 </body>
