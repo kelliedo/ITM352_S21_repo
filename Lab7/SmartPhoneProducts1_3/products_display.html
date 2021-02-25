@@ -9,6 +9,7 @@
         var store_name = "Kellie Do";
         var first_name = "Kellie";
         var last_name = "Do";
+        var over_half = false;
     </script>
     <title>Smartphone Products</title>
 </head>
@@ -17,15 +18,15 @@
     <header>
         <center>
             <span style="font-size: 600%;">
-            <script>
-                
+                <script>
+
                     document.write("<b>" + first_name + "</b><i>" + last_name + "</i>'s");
-                
-            </script>
+
+                </script>
             </span>
-        <h1>   
-            Used Smart Phone Store
-        </h1>
+            <h1>
+                Used Smart Phone Store
+            </h1>
         </center>
         <p style="text-align: center; font-weight: bold;">
             Hits:<span id="hits_span">0</span>
@@ -42,15 +43,41 @@
             " style="direction: rtl;">
             </div>
 
-            <section class="item" 
-            onmouseover="
-            spins_span.innerHTML = ++spins; 
-            this.className= 'item rotate';
-            hit_spin_span.innerHTML = number.toFixed(hits_span.innerHTML/spins_span.innerHTML);
-            " onclick="
-            hits_span.innerHTML = hits_span.innerHTML/spins_span.innerHTML;
-            this.className='item';
-            ">
+            <section class="item" onmouseover="
+            if(this.className.includes('rotate') != true) {
+                spins_span.innerHTML = ++spins; 
+                this.className= 'item rotate';
+            }
+            // -- Winning progress depends on hits/spins
+            hits_spins_ratio = hits/spins;
+            if ( hits_spins_ratio > 0 && hits_spins_ratio < 0.25 ) {
+                progress = 'On your way!';
+            }    
+            else if ( hits_spins_ratio >= 0.25 && hits_spins_ratio <0.5 ) {
+                    progress = 'Almost there!';
+            }        
+            else if ( hits_spins_ratio >= 0.5 ) {
+                    if (hits < spins) {
+                        progress = 'You win!';
+                    }
+            }
+            else {
+                progress = 'Get going!' ;
+            }
+    
+                hit_spin_span.innerHTML = (hits_spins_ratio).toFixed(2);
+                over_half ||= ((hits_spins_ratio >= 0.5) && (hits < spins));
+                win_span.innerHTML = progress;
+                " onclick="
+            if(this.className.includes('rotate')) {
+                hits_span.innerHTML = ++hits;
+                this.className = 'item';
+            } else {
+                this.className = 'item rotate';
+            }   
+                win_span.innerHTML = ((hits/spins >= 0.5) && (hits < spins));
+                hit_spin_span.innerHTML = (hits/spins).toFixed(2);
+                over_half ||= ((hits/spins >= 0.5) && (hits < spins));">
                 <h2>HTC</h2>
                 <p>&dollar;40.00</p>
                 <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/HTC.jpg"></img>
@@ -111,17 +138,17 @@
     </div>
     <footer>
         <script>
-            line=0;
+            line = 0;
             now = new Date();
-        document.write(`
+            document.write(`
         <table border="1" style="margin-left: auto; margin-right: auto; text-align: center;">
             <tr><th colspan="2"><h1>Your One Stop For Used Phones - ${first_name[0] + '.' + last_name[0] + '.'}'s</h1></th></tr>
             <tr><td>${++line}</td><td><br />Copyright @ ${first_name + " " + last_name}</td></tr>
             <tr><td>${++line}</td><td>${now.getFullYear()}</td></tr>
-            <tr><td>${++line}</td><td>${(now.getHours() + 11) % 12 + 1 + ':' + now.getMinutes() + ' '} ${(now.getHours() < 12)? 'AM':'PM'}</td></tr>
+            <tr><td>${++line}</td><td>${(now.getHours() + 11) % 12 + 1 + ':' + now.getMinutes() + ' '} ${(now.getHours() < 12) ? 'AM' : 'PM'}</td></tr>
         </table>
         `);
-    </script>
+        </script>
     </footer>
 
 </body>
