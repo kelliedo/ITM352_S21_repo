@@ -21,7 +21,7 @@ var products = [
     },
     {
         "product": "Surfing Pineapple Sticker",
-        "price": 2.5,
+        "price": 2.50,
         "image": "surfingpineapple.png"
     }
     ];

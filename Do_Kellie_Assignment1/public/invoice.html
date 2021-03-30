@@ -5,7 +5,7 @@
 let params = (new URL(document.location)).searchParams;
         var quantities = []; 
         console.log(quantities);
-        if (params.has('Purchase_Button')) {
+        if (params.has('purchase_submit')) {
           for (i = 0; i < products.length; i++) {
             if (params.has(`quantity${i}`)) {
               a_qty = params.get(`quantity${i}`);
@@ -15,14 +15,14 @@ let params = (new URL(document.location)).searchParams;
         }
 
 // taken from invoice 4
-function isNonNegIntString(string_to_check, returnErrors) {
+/* function isNonNegIntString(string_to_check, returnErrors) {
     errors = []; // assume no errors at first
     if(Number(string_to_check) != string_to_check) errors.push('Not a number!'); // Check if string is a number value
     if(string_to_check < 0) errors.push('Negative value!'); // Check if it is non-negative
     if(parseInt(string_to_check) != string_to_check) errors.push('Not an integer!'); // Check that it is an integer
 
     return returnErrors ? errors : (errors.length == 0);
-}
+} */
 
 // subtotal calculation
     var subtotal = 0;
@@ -56,7 +56,7 @@ function isNonNegIntString(string_to_check, returnErrors) {
                 subtotal = extended_price + subtotal;
                 document.write(`
             <tr>
-              <td width="43%">${products[i].name}</td>
+              <td width="43%">${products[i].product}</td>
               <td align="center" width="11%">${quantities[i]}</td>
               <td width="13%">\$${products[i].price}</td>
               <td width="54%">\$${extended_price}</td>
