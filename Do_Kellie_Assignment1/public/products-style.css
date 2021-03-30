@@ -4,3 +4,9 @@
   display: block;
   bottom: 30px;
 }
+
+  main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content:space-evenly;
+  }
