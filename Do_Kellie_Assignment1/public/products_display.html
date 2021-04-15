@@ -5,11 +5,23 @@
 </script>
 
 <script>
+function isNonNegInt(string_to_check, returnErrors = false) { 
+        if (string_to_check == "") string_to_check = 0;
+        errors = []; // assume no errors at first
+        if (Number(string_to_check) != string_to_check) // Check if string is a number value
+            errors.push('<font color="red">Not a number!</font>');
+        else if (string_to_check < 0) // Check if it is non-negative
+            errors.push('<font color="red">Negative value!</font>');
+        else if (parseInt(string_to_check) != string_to_check) // Check that it is an integer
+            errors.push('<font color="red">Not an integer!</font>'); 
+
+        return returnErrors ? errors : (errors.length == 0); 
+    }
+
     // taken from Lab 12 and edited it to include quantity
     // create a new URL that will create a quantity array when the purchase button has been clicked
-let params = (new URL(document.location)).searchParams;
 window.onload = function () {
-    console.log(quantities);
+    let params = (new URL(document.location)).searchParams;
     if (params.has('purchase_submit')) { // if the button was clicked
         has_errors = false; // assume no errors at first
         total_qty = 0;
@@ -31,19 +43,8 @@ window.onload = function () {
     } 
 }
 
-    // taken from lab 11
-    errors = []; // assume no errors at first
-function isNonNegIntString(string_to_check, returnErrors = false) {
-    errors = []; // assume no errors at first
-    if(Number(string_to_check) != string_to_check) errors.push('Not a number!'); // Check if string is a number value
-    if(string_to_check < 0) errors.push('Negative value!'); // Check if it is non-negative
-    if(parseInt(string_to_check) != string_to_check) errors.push('Not an integer!'); // Check that it is an integer
-
-    return returnErrors ? errors : (errors.length == 0);
-}
-
-
 // function taken from assignment 1 example
+// checks if what was entered in the textbox is a valid integer
     function checkQuantityTextbox(theTextbox) { 
         errs = isNonNegInt(theTextbox.value, true); 
         if (errs.length == 0) errs = ['You ordered:']; 
@@ -120,10 +121,9 @@ function isNonNegIntString(string_to_check, returnErrors = false) {
                         <div class="w3-display-container">
                         <h2>${products[i].product}</h2>
                         <p>$${(products[i].price.toFixed(2))}</p>
-                        <label id="quantity${i}_label"> Quantity: </label>
-                        <input type="text" width="200" placeholder"0" name="quantity${i}" onkeyup = "checkQuantityTextbox(this);">
+                        <label id="quantity${i}_label"> Quantity </label>
+                        <input name="quantity${i}" type="text" placeholder"0" onkeyup = "checkQuantityTextbox(this);">
                         <img src="./images/${products[i].image}">
-                        
                     </section>
                     `);
                             }
