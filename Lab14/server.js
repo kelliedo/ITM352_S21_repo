@@ -3,6 +3,17 @@ var app = express();
 var myParser = require("body-parser");
 app.use(myParser.urlencoded({extended: true}));
 var qs = require('qs');
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+//play with cookies
+app.get('set_cookie', function (req, res, next ) {
+    console.log(req.cookies);
+    let my_name = 'Kellie Do';
+    res.cookie('my_name', my_name);
+    res.send(`Cookie for ${my_name} sent`);
+    next();
+});
 
 // var user_data = require('.user_data.json');
 // read user data file
