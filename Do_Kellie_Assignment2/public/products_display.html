@@ -5,7 +5,7 @@
 </script>
 
 <script>
-// checks if inputs are negative or not integers, outputs if errors exists
+// checks if inputs are negative or not integers, outputs if errors
 function isNonNegInt(string_to_check, returnErrors = false) { 
         if (string_to_check == "") string_to_check = 0;
         errors = []; // assume no errors at first
@@ -95,6 +95,7 @@ window.onload = function () {
         <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button">Home</a>
         <a href="#stickers" onclick="w3_close()" class="w3-bar-item w3-button">Stickers</a>
         <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+        
     </nav>
 
     <!-- Top menu -->
@@ -145,9 +146,21 @@ window.onload = function () {
                 <div class="w3-container w3-padding-32 w3-center">
                     <h3>About Our Stickers</h3><br>
                     <div class="w3-padding-32">
-                        <p>All of our stickers are designed with inspiration from the islands. They're water resistant
-                            and made with aloha in Hawai'i!</p>
+                        <p>All of our stickers are designed with inspiration from the islands. </p>
+                        <p>They're water resistant and made with aloha in Hawai'i!</p>
                     </div>
+                </div>
+                <hr>
+
+                <hr id="register">
+                <!-- Registration Button -->
+                <div class="w3-container w3-padding-32 w3-center">
+                        <!-- Registration Button -->
+                        <div class="container" >
+                            <a href="register.html">
+                                <button type="button" class="registrationbtn">Register</button>
+                            </a>
+                        <br>
                 </div>
                 <hr>
             </div>

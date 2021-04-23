@@ -3,6 +3,37 @@ var app = express();
 var myParser = require("body-parser");
 app.use(myParser.urlencoded({extended: true}));
 var qs = require('qs');
+var fs = require('fs');
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+var session = require('express-session');
+
+app.use(session({secret: "ITM352 rocks!"}));
+
+// play with sessions
+app.get('/set_session', function(req, res, next) {
+    res.send(`welcome, your session ID is ${req.session.id}`);
+    next();
+});
+
+// play with cookies
+app.get('/set_cookie', function(req, res, next) {
+    let my_name = 'Kellie Do';
+    now = new Date();
+    res.cookie('my_name', my_name, {expire: now.getTime()});
+    res.send(`Cookie for ${myname} sent`);
+    next();
+});
+
+// play with cookies
+app.get('/use_cookie', function(req, res, next) {
+    if(typeof req.cookies["my_name"] != 'undefined') {
+        res.send(`Hello ${req.cookies["my_name"]}!`);
+    } else {
+        res.send("I don't know you!");
+    }
+    next();
+});
 
 // var user_data = require('.user_data.json');
 // read user data file
@@ -23,7 +54,13 @@ app.all('*', function (req, res, next ) {
 });
 
 // this processes the login form
-app.post('/process.login', function (request,response, next) {
+app.post('/process_login', function (request,response, next) {
+    if(typeof request.session['last_login'] != 'undefined') {
+        console.log('Last login time was ' + request.session['last_login']);
+    } else {
+        console.log("first time login");
+    }
+    request.session['last_login'] = Date();
     console.log(request.body);
     let username_entered = request.body["uname"];
     let password_entered = request.body["psw"];

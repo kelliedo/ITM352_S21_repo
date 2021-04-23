@@ -1,0 +1,56 @@
+<script>
+    /* Kellie Do ITM352 login.html page
+    Used w3schools login page template linked here:
+    https://www.w3schools.com/howto/howto_css_login_form.asp 
+    */
+</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="login.css" rel="stylesheet">
+    <title>Login Page</title>
+    <style>
+        body {
+            text-align: center;
+            background: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Code used and slightly edited for login page taken from w3schools -->
+    <form name="loginPage" action="process_login" method="POST">
+        <div class="imgcontainer">
+            <img src="https://www.pngitem.com/pimgs/m/522-5220445_anonymous-profile-grey-person-sticker-glitch-empty-profile.png" height="200px" width="200px" alt="Avatar" class="avatar">
+        </div>
+        <!-- Username Input -->
+        <div class="container">
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+            <!-- Password Input-->
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+            <!-- Login Button-->
+            <a href="invoice.html? + stringified">
+                <button type="submit">Login</button>
+            </a>
+            <!-- Remember me Checkbox-->
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+        </div>
+        <!-- Clicking the cancel button takes user back to products page-->
+        <div class="container">
+            <a href="products_display.html">
+                <button type="button" class="cancelbtn">Cancel</button>
+            </a>
+            <!-- Register an account button -->
+            <span class="register">Don't have an account? <a href="register.html">Register now!</a></span>
+        </div>
+    </form>
+</body>
+
+</html>
