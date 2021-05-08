@@ -31,7 +31,7 @@ function checkQuantityTextbox(theTextbox) {
     // create a new URL that will create a quantity array when the purchase button has been clicked
 window.onload = function () {
     let params = (new URL(document.location)).searchParams;
-    if (params.has('purchase_submit')) { // if the button was clicked
+    if (params.has('purchase_submit')) { // if the purchase button was clicked
         has_errors = false; // assume no errors at first
         total_qty = 0;
         for (i = 0; i < products.length; i++) {
@@ -102,10 +102,13 @@ window.onload = function () {
     <div class="w3-top">
         <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
             <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
-
+            <div class="w3-right w3-padding-16"><a href="login.html">
+                <button type="button" class="loginbtn">Login</button>
+            </a></div>
             <div class="w3-center w3-padding-16">K's Sticker Shop</div>
         </div>
     </div>
+
 
     <!-- !PAGE CONTENT! -->
     <div class="content">
@@ -157,6 +160,8 @@ window.onload = function () {
                 <div class="w3-container w3-padding-32 w3-center">
                         <!-- Registration Button -->
                         <div class="container" >
+                            <p>Don't have an account?</p>
+
                             <a href="register.html">
                                 <button type="button" class="registrationbtn">Register</button>
                             </a>

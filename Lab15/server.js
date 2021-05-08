@@ -66,6 +66,7 @@ app.post('/process_login', function (request,response, next) {
     let password_entered = request.body["psw"];
     if(typeof user_data[username_entered] != 'undefined') {
         if(user_data[username_entered]['password'] == password_entered){
+            response.cookie('username', username_entered);
             response.send('${username_entered} is logged in');
         } else {
             response.send(`${username_entered} password wrong`);

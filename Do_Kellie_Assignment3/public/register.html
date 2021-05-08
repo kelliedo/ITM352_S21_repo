@@ -1,0 +1,95 @@
+<script>
+/*  Kellie Do ITM352 register.html page
+    refrenced w3resource.com for code to make a registration page
+    https://www.w3resource.com/javascript/form/javascript-sample-registration-form-validation.php
+*/     
+</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            text-align: center;
+            background: white;
+        }
+    </style>
+    <script>
+        let params = (new URL(document.location)).searchParams;
+
+        window.onload = function() {
+            if (params.has('registration_errors')) { // if there are errors, tell the user
+                console.log("Invalid");
+                alert('Fix the following errors: \n' + params.get('register_errors'));
+            }
+        }
+    </script>
+    <meta charset="utf-8">
+    <title>Registration Form</title>
+    <meta name="keywords" content="example, JavaScript Form Validation, Sample registration form" />
+    <meta name="description"
+        content="This document is an example of JavaScript Form Validation using a sample registration form. " />
+    <script src="server.js"></script>
+</head>
+
+<body>
+    <h1>Registration Form</h1>
+    <br>
+    Please fill out this form to create an account. Upon successful registration, you will be directed to your invoice.
+    <br>
+    <br>
+    <form name='registration' action="process_register" method="POST">
+        <!-- Username Input -->
+        <div class="container">
+            <label for="username">Username:</label>
+            <input type="text" name="username" size="40" placeholder="Must be 4-10 characters; only letters and numbers"/>
+        </div>
+        <br>
+        <!-- Password Input-->
+        <div class="container">
+            <label for="password">Password:</label>
+            <input type="password" name="password" size="20" placeholder="6 characters minimum"/>
+        </div>
+        <br>
+        <!-- Confirm Password Input-->
+        <div class="container">
+            <label for="confirmpass">Confirm Password:</label>
+            <input type="password" name="confirmpassword" size="30" placeholder="Enter the same password as above"/>
+        </div>
+        <br>
+        <!-- Full Name Input -->
+        <div class="container">
+            <label for="username">Name:</label>
+            <input type="text" name="fullname" size="50" placeholder="Please enter your first and last name"/>
+        </div>
+        <br>
+        <!-- Email Input -->
+        <div class="container">
+            <label for="email">Email:</label>
+            <input type="text" name="email" size="50" placeholder="Please enter a valid email adress"/>
+        </div>
+        <br>
+        <!-- Submit Registration Form Button -->
+        <div class="container">
+            <button type="submit" class="registerbtn">Register</button>
+        </div>
+        <br>
+        <!-- Login Button -->
+        <br>
+        Already have an account?
+        <br>
+        <div class="container" >
+            <a href="login.html">
+                <button type="button" class="loginbtn">Login</button>
+            </a>
+        <br>
+        <br>
+        <!-- Clicking the cancel button takes user back to products page-->
+        <div class="container" >
+            <a href="products_display.html">
+                <button type="button" class="cancelbtn">Cancel</button>
+            </a>
+    </form>
+</body>
+
+</html>
