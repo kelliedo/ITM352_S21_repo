@@ -1,16 +1,15 @@
 /* Kellie Do's Assignment 2 Server.js  
 Referenced Lab 13, Lab 14 and Assignment 1 & 2 examples
+Validation copied from W3 Schools
 */
 
-var data = require('./public/product_data.js'); // load product data
-var products_array = data.products; // put data in product_data file into the variable products_array
-const queryString = require('query-string'); // use variable querystring as the loaded module
 var express = require('express'); // load express module
-var app = express(); // set module
-var myParser = require("body-parser"); // load body parser module
-var fs = require('fs'); // load file system
-var filename = 'user_data.json'; // store user_data.json file in variable filename
-const { response } = require('express');
+var app = express(); // starts express
+var myParser = require("body-parser"); // load parser module
+var products = require("./public/product_data.js"); // get product_data.js
+var queryString = require('query-string'); // use variable querystring as the loaded module
+fs = require('fs'); //Use the file system module 
+var filename = 'user_data.json';
 
 app.all('*', function (request, response, next) {
     console.log(request.method + ' to ' + request.path); // display in console the request method and path
@@ -18,23 +17,21 @@ app.all('*', function (request, response, next) {
 });
 
 // taken from lab 13, starts parser
-app.use(myParser.urlencoded({ extended: true })); // use the data in the body
+app.use(myParser.urlencoded({ extended: true })); 
 
 // taken from lab 14, checks to see if user_data.json exists
 if (fs.existsSync(filename)) { // if file exists
-  stats = fs.statSync(filename) // get stats from file
-  console.log(filename + 'has' + stats.size + 'characters'); // output in console how many characters the file has
-  data = fs.readFileSync(filename, 'utf-8'); 
-  user_data = JSON.parse(data); 
+  data = fs.readFileSync(filename, 'utf-8'); // read file
+  users_reg_data = JSON.parse(data); // set it to variable users_reg_data
 } else { 
   console.log(filename + 'does not exist!'); // output in console file does not exist
 }
 
 // refrenced Lab 14 and assignment 2 examples, process the login to either the invoice or go back to the login page
 app.post("/process_login", function (request, response) {
-  var login_error = []; 
-  console.log(request.query); // print the request
-  lowercaseusername = request.body.username.toLowerCase(); // Sets username to lowercase
+  var login_error = []; // create an arry of login errors
+  console.log(request.query); // print the request in console
+  lowercaseusername = request.body.username.toLowerCase(); // make username lowercase
   if (typeof users_reg_data[lowercaseusername] != 'undefined') { // checks if username is in the system
       if (users_reg_data[lowercaseusername].password == request.body.password) { // get password
           request.query.username = lowercaseusername; // username gets added to the query object
@@ -58,80 +55,77 @@ app.post("/process_login", function (request, response) {
 });
 
 // referenced lab 14 and assignment 2 examples
-app.post("/process_registration", function (request, response) {
-  var errors = [];
-  console.log(request.body);
-  lowercaseusername = request.body.username.toLowerCase(); // make username lowercase
-  /* Full name validation */
-  if (/^[A-Za-z]+$/.test(request.body.name)) { // make sure the full name consists of letters only
-  } else {
-      errors.push('Full name must consist of letters only');
-  } 
-  if (request.body.name == "") { // full name validation
-      errors.push('Invalid full name');
-  }
-  if ((request.body.fullname.length > 30)) { // checks if fullname is 30 characters or less
-      errors.push('Full name must be 30 characters or less')
-  }
-
-  /* Username validation */
-  if (typeof users_reg_data[lowercaseusername] != 'undefined') { // if username is taken (already in user_data.json), notify user
-      errors.push("Username is already taken");
-  }
-  if (/^[0-9a-zA-Z]+$/.test(request.body.lowercaseusername)) { // only allows the usage of letters and numbers when inputting username into the form
-  } else {
-      errors.push('Username must consist of only letters and numbers');
-  }
-  if ((request.body.username.length > 10)) { // alerts user if username is too long
-      errors.push('Username must be 10 characters or less');
-  }
-  if ((request.body.username.length < 4)) { // alerts user if username is too short
-      errors.push('Username must be 4 characters or more');
-  }
-
-  /* Password validation */
-  if (request.body.password.length < 6) { // Notifies user if password is too short
-      errors.push('Password is too short; Minimum is 6 characters')
-  }
-  if (request.body.password !== request.body.repeat_password) { // Notifies user if password and their repeated passwords do not match up
-      errors.push('Passwords do not match');
-  }
-
-  /* Email validation */
-  if ((/[a-z0-9._]+@[a-z0-9]+\.[a-z]+/).test(request.body.email)) { // only allows letters and numbers for the user address and letters for the domain name
-  } else {
-      errors.push('Please enter a valid email'); // alerts user of error
-  }
-
-  /* If there are no errors, save the user's registration to user_data.json */
-  if (errors.length == 0) {
-      console.log(errors)
-      var username = request.body.username // get username
-  /* The following will get inputted to the user_data.json */
+// function that will valid all registration data
+// when registration data is valid, will proceed to invoice.html
+app.post("/process_register", function (req, res) { 
+    qStr = req.body
+    console.log(qStr);
+    var errors = [];
+  
+    if (/^[A-Za-z]+$/.test(req.body.name)) { // validates if name consists of letters only
+    }
+    else { 
+      errors.push('Full name must consist of letters only') // print error
+    }
+  
+    if (req.body.name == "") { // name must include a space to ensure it is a full name
+      errors.push('Invalid Full Name'); // print error
+    }
+  
+    if ((req.body.fullname.length > 25 && req.body.fullname.length < 0)) { // checks to see if full name is less than 25 characters
+      errors.push('Full Name Too Long') // print error
+    }
+  
+    var reguser = req.body.username.toLowerCase();  // makes username lowercase
+    if (typeof users_reg_data[reguser] != 'undefined') { // checks if data matches data in our user_data.json file
+      errors.push('Username is already being used') // print error
+    }
+  
+    if (/^[0-9a-zA-Z]+$/.test(req.body.username)) { // checks if username consists of only letters and numbers
+    }
+    else {
+      errors.push('Letters And Numbers Only for Username') // else, print error
+    }
+  
+  
+    if (req.body.password.length < 6) { // checks if password is 6 characters or more
+      errors.push('Password Too Short') // if it's not, print error
+    }
+  
+    if (req.body.password !== req.body.confirmpassword) { // checks if both passwords match
+      errors.push('Password Not a Match') // print error if they do not match
+    }
+  
+    if (errors.length == 0) { // if there are no errors, save data to user_data.json and go to invoice page
+      POST = req.body
+      console.log('no errors')
+      var username = POST['username'];
+      var name = POST['fullname'];
       users_reg_data[username] = {};
-      users_reg_data[username].name = request.body.name;
-      users_reg_data[username].username = request.body.username
-      users_reg_data[username].password = request.body.password;
-      users_reg_data[username].email = request.body.email;
-      fs.writeFileSync(filename, JSON.stringify(users_reg_data)); // write new data into user_data.json as a string
-      response.redirect('./invoice.html?' + queryString.stringify(request.query)); // Redirects to invoice if all is ok
-  } else { 
-  /* If there are errors, send the user back to the registration page */
+      users_reg_data[username].name = username;
+      users_reg_data[username].password = POST['password'];
+      users_reg_data[username].email = POST['email'];
+      data = JSON.stringify(users_reg_data);
+      fs.writeFileSync(filename, data, "utf-8");
+      res.redirect('./invoice.html?' + queryString.stringify(req.query)); // go to invoice.html
+    }
+  
+    if (errors.length > 0) { // if there are errors, go back to registration page, but keep data sticky
       console.log(errors)
-  /* Make login values sticky */
-      request.query.name = request.body.name;
-      request.query.username = request.body.username;
-      request.query.password = request.body.password;
-      request.query.repeat_password = request.body.repeat_password;
-      request.query.email = request.body.email;
-      response.redirect('/register.html?' + queryString.stringify(request.query)); // Redirect to registration page if there are errors
-  }
-});
+      req.query.name = req.body.name;
+      req.query.username = req.body.username;
+      req.query.password = req.body.password;
+      req.query.confirmpassword = req.body.confirmpassword;
+      req.query.email = req.body.email;
+  
+      req.query.errors = errors.join(';');
+      res.redirect('register.html?' + queryString.stringify(req.query));
+    }
+  });
 
-// Lab 13
 app.post("/process_purchase", function (request, response) {
   let POST = request.body; // take the data and package it in the body
-  if (typeof POST['purchase_submit'] != 'undefined') { 
+  if (typeof POST['submitPurchase'] != 'undefined') { 
       var hasvalidquantities = true; // assume has valid quantities
       var hasquantities = false; // assume there are quantities
       for (i = 0; i < products.length; i++) {
@@ -139,11 +133,12 @@ app.post("/process_purchase", function (request, response) {
           hasquantities = hasquantities || qty > 0;
           hasvalidquantities = hasvalidquantities && isNonNegInt(qty);
       }
-      var stringified = queryString.stringify(POST); // converts to json
+      const stringified = queryString.stringify(POST); // converts to json
       if (hasvalidquantities && hasquantities) { // if quantities are valid
           response.redirect("./login.html?" + stringified); // goes to login page
+          return;
       } else {
-          response.redirect("./products_display.html?" + stringified)
+          response.redirect("./products_display.html?" + stringified) // go to products_display.html if quantities are not valid
       }
   }    
 });
