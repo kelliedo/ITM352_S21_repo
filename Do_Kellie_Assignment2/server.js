@@ -138,7 +138,7 @@ app.post("/process_purchase", function (request, response) {
           response.redirect("./login.html?" + stringified); // goes to login page
           return;
       } else {
-          response.redirect("./products_display.html?" + stringified) // go to products_display.html if quantities are not valid
+          response.redirect("./products_display.html?") // go to products_display.html if quantities are not valid
       }
   }    
 });

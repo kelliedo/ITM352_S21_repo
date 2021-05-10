@@ -6,7 +6,6 @@
 </script>
 <script src="./user_data.json" type="json"></script>
 <script>
-    
 let params = (new URL(document.location)).searchParams;
 window.onload = function () { // alert the user if password or username is incorrect, function reference from Alyssa Mencel
     if(params.has('login_error')) {
