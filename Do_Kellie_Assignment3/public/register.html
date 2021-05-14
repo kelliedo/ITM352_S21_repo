@@ -1,9 +1,10 @@
 <script>
-/*  Kellie Do ITM352 register.html page
-    refrenced w3resource.com for code to make a registration page
-    https://www.w3resource.com/javascript/form/javascript-sample-registration-form-validation.php
-*/     
+    /*  Kellie Do ITM352 register.html page
+        refrenced w3resource.com for code to make a registration page
+        https://www.w3resource.com/javascript/form/javascript-sample-registration-form-validation.php
+    */
 </script>
+<script src="./user_data.json" type="json"></script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,20 +17,20 @@
     </style>
     <script>
         let params = (new URL(document.location)).searchParams;
-
-        window.onload = function() {
-            if (params.has('registration_errors')) { // if there are errors, tell the user
-                console.log("Invalid");
-                alert('Fix the following errors: \n' + params.get('register_errors'));
+        window.onload = function () { // creating the function for window.onload
+            //if there are errors it tells the user 
+            if (params.has('errors')) {
+                alert('Fix the following errors: \n' + params.get('errors'));
             }
         }
+
     </script>
     <meta charset="utf-8">
     <title>Registration Form</title>
     <meta name="keywords" content="example, JavaScript Form Validation, Sample registration form" />
     <meta name="description"
         content="This document is an example of JavaScript Form Validation using a sample registration form. " />
-    <script src="server.js"></script>
+
 </head>
 
 <body>
@@ -42,54 +43,59 @@
         <!-- Username Input -->
         <div class="container">
             <label for="username">Username:</label>
-            <input type="text" name="username" size="40" placeholder="Must be 4-10 characters; only letters and numbers"/>
+            <input type="text" name="username" size="40"
+                placeholder="Must be 4-10 characters; only letters and numbers" />
         </div>
         <br>
         <!-- Password Input-->
         <div class="container">
             <label for="password">Password:</label>
-            <input type="password" name="password" size="20" placeholder="6 characters minimum"/>
+            <input type="password" name="password" size="20" placeholder="6 characters minimum" />
         </div>
         <br>
         <!-- Confirm Password Input-->
         <div class="container">
             <label for="confirmpass">Confirm Password:</label>
-            <input type="password" name="confirmpassword" size="30" placeholder="Enter the same password as above"/>
+            <input type="password" name="confirmpassword" size="30" placeholder="Enter the same password as above" />
         </div>
         <br>
         <!-- Full Name Input -->
         <div class="container">
             <label for="username">Name:</label>
-            <input type="text" name="fullname" size="50" placeholder="Please enter your first and last name"/>
+            <input type="text" name="fullname" size="50" placeholder="Please enter your first and last name" />
         </div>
         <br>
         <!-- Email Input -->
         <div class="container">
             <label for="email">Email:</label>
-            <input type="text" name="email" size="50" placeholder="Please enter a valid email adress"/>
+            <input type="text" name="email" size="50" placeholder="Please enter a valid email adress" />
         </div>
         <br>
         <!-- Submit Registration Form Button -->
         <div class="container">
             <button type="submit" class="registerbtn">Register</button>
         </div>
-        <br>
-        <!-- Login Button -->
-        <br>
-        Already have an account?
-        <br>
-        <div class="container" >
-            <a href="login.html">
-                <button type="button" class="loginbtn">Login</button>
-            </a>
+    </form>
+    <br>
+    <!-- Login Button -->
+    <br>
+    Already have an account?
+    <br>
+    <div class="container">
+        <a href="login.html">
+            <button type="button" class="loginbtn">Login</button>
+        </a>
         <br>
         <br>
         <!-- Clicking the cancel button takes user back to products page-->
-        <div class="container" >
+        <div class="container">
             <a href="products_display.html">
                 <button type="button" class="cancelbtn">Cancel</button>
             </a>
-    </form>
+
+            <script>
+                registration.action += document.location.search;
+            </script>
 </body>
 
 </html>

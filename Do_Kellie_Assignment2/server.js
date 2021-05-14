@@ -9,7 +9,7 @@ var myParser = require("body-parser"); // load parser module
 var products = require("./public/product_data.js"); // get product_data.js
 var queryString = require('query-string'); // use variable querystring as the loaded module
 fs = require('fs'); //Use the file system module 
-var filename = 'user_data.json';
+var filename = 'user_data.json'; // set filename variable
 
 app.all('*', function (request, response, next) {
     console.log(request.method + ' to ' + request.path); // display in console the request method and path

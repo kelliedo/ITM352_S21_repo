@@ -1,27 +1,27 @@
 var products = [
     {
-        "product": "Aloha Diamondhead Sticker",
+        "item": "Aloha Diamondhead Sticker",
         "price": 3,
         "image": "alohadiamondhead.png"
     },
     {
-        "product": "Aloha Hawaii Pineapple Sticker",
+        "item": "Aloha Hawaii Pineapple Sticker",
         "price": 2,
         "image": "alohahawaiipineapple.png"  
     },
     {
-        "product": "Gekko Sticker",
-        "price": 1.75,
+        "item": "Gekko Sticker",
+        "price": 2.75,
         "image": "gekko.png"
     },    
     {
-        "product": "Musubi Sticker",
-        "price": 3,
+        "item": "Musubi Sticker",
+        "price": 3.25,
         "image": "musubi.png"
     },
     {
-        "product": "Surfing Pineapple Sticker",
-        "price": 2.50,
+        "item": "Surfing Pineapple Sticker",
+        "price": 2.75,
         "image": "surfingpineapple.png"
     }
     ];
