@@ -4,6 +4,27 @@
         https://www.w3resource.com/javascript/form/javascript-sample-registration-form-validation.php
     */
 </script>
+<script>
+      function getCookie(cname) { // get cookie
+  var name = cname + "="; 
+  var decodedCookie = decodeURIComponent(document.cookie); // set cookie in variable decodedCookie
+  var ca = decodedCookie.split(';'); // split cookie
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i]; // set variables
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    } // getting cookie by name 
+    if (c.indexOf(name) == 0) {  
+      return c.substring(name.length, c.length);
+    }
+  }
+  return ""; // returing cookie
+}
+var username = getCookie('username'); // get the cookies username
+
+
+
+</script>
 <script src="./user_data.json" type="json"></script>
 <!DOCTYPE html>
 <html lang="en">
