@@ -39,17 +39,59 @@
 
 <body>
 
-    <h1>K's Sticker Shop</h1>
-    <a href="products_display.html">
-        <img src="./images/alohadiamondhead.png">
+    <h1>Welcome to K's Sticker Shop!</h1>
+    <a href="pineapplestickers.html">
+        <img src="./images/alohahawaiipineapple.png">
     </a>
-    <h2>Welcome! Enter the store by clicking the image above!</h2>
+    <h2>Pineapple Stickers</h2> <br><br>
+    <a href="foodstickers.html">
+        <img src="./images/musubi.png">
+    </a>
+    <h2>Food Stickers</h2> <br><br>
+    <a href="creaturestickers.html">
+        <img src="./images/surfingmonkey.png">
+    </a>
+    <h2>Creature Stickers</h2> <br><br>
 
-
+    <a href="otherstickers.html">
+        <img src="./images/spreadalohanotcovidsticker.png">
+    </a>
+    <h2>Other Stickers</h2> <br><br>
 
 </body>
 <footer>
-
+    <footer>
+        <!-- Code taken from Alyssa Mencel, displays the data in cookie -->
+        <div>
+                <script>
+                    // review user data
+                    var theUser = getCookie('name'); // set name in cookie to variable theUser
+                    var theUsername = getCookie('username'); // set username in cookie to variable username
+                    var email = getCookie('email'); // set email in cookie to variable email
+                    var lastVisited = getCookie('last_login_time'); // set last visited time in cookie and set to variable
+                    if (theUsername != '') {  // if there is a username, display it along with the time they last visited
+                        document.write(`
+                            <p>Logged in as: <font color="#629DD1">${theUsername}</font>.   Not you? <a href= "login.html" style=style="color": #629DD1> Log in </a> or <a href= "register.html" style=style="color": #629DD1>register an account</a> <p> 
+                            <p>Last log-in: <font color="#629DD1">${lastVisited}</font></p>
+                        `)
+                    } else { // else tell them to log in 
+                        document.write(`
+                            <p>Not logged in. Please log in <a href="login.html" style="color": #629DD1; font-size: 1em; font-family: inherit;">here</a></p>
+                        `)
+                    };
+                    // gets the amount of products in the users cart
+                    var cart = sessionStorage.length;
+                                    if (cart > 0) {
+                                        console.log(
+                                            cart
+                                        )
+                                    };
+                </script>
+    
+            </section>
+    
+    </div>
+    </footer>
 </footer>
 
 </html>
