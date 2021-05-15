@@ -8,12 +8,13 @@ var products = data.products; // set data from product_data.js and set to variab
 
 var express = require('express'); // load express module
 var app = express(); // starts express
-var myParser = require("body-parser"); // load parser module
 var queryString = require('query-string'); // load querystring
 var fs = require('fs'); // use the file system module 
 var filename = 'user_data.json'; // set filename variable
 var nodemailer = require('nodemailer'); // load nodemailer
 var session = require("express-session"); // use the express-session module
+
+var myParser = require("body-parser"); // load parser module
 app.use(myParser.urlencoded({ extended: true })); // taken from lab 13, starts parser
 
 var cookieParser = require('cookie-parser'); // load cookie module
@@ -22,6 +23,12 @@ app.use(cookieParser());  // use cookieparser
 app.all('*', function (request, response, next) {
   console.log(request.method + ' to ' + request.path); // display in console the request method and path
   next(); // continue
+});
+
+app.get("/cart.html", function (request, response) {
+  cartfile = `<script> var cart = ${JSON.stringify(request.session)}</script>`; // load in cart page
+  cartfile += fs.readFileSync('./public/cart.html', 'utf-8'); 
+  response.send(cartfile); // send cartfile
 });
 
 app.post("/checkout", function (request, response) {
